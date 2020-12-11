@@ -50,7 +50,7 @@ for (let i = 0; i < brickRowCount; i++) {
   }
 }
 
-// Draw ball on canvas
+// Ball
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
@@ -59,7 +59,7 @@ function drawBall() {
   ctx.closePath();
 }
 
-// Draw paddle on canvas
+// Paddle
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
@@ -68,13 +68,13 @@ function drawPaddle() {
   ctx.closePath();
 }
 
-// Draw score oon canvas
+// Score
 function drawScore() {
   ctx.font = '20px Arial';
   ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
 }
 
-// Draw bricks on canvas
+// Bricks
 function drawBricks() {
   bricks.forEach(column => {
     column.forEach(brick => {
@@ -87,7 +87,7 @@ function drawBricks() {
   });
 }
 
-// Move paddle on canvas
+// Move paddle
 function movePaddle() {
   paddle.x += paddle.dx;
 
@@ -101,7 +101,7 @@ function movePaddle() {
   }
 }
 
-// Move ball on canvas
+// Move ball
 function moveBall() {
   ball.x += ball.dx;
   ball.y += ball.dy;
@@ -115,8 +115,6 @@ function moveBall() {
   if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
     ball.dy *= -1;
   }
-
-  // console.log(ball.x, ball.y);
 
   // Paddle collision
   if (
@@ -132,10 +130,10 @@ function moveBall() {
     column.forEach(brick => {
       if (brick.visible) {
         if (
-          ball.x - ball.size > brick.x && // left brick side check
-          ball.x + ball.size < brick.x + brick.w && // right brick side check
-          ball.y + ball.size > brick.y && // top brick side check
-          ball.y - ball.size < brick.y + brick.h // bottom brick side check
+          ball.x - ball.size > brick.x && 
+          ball.x + ball.size < brick.x + brick.w && 
+          ball.y + ball.size > brick.y && 
+          ball.y - ball.size < brick.y + brick.h 
         ) {
           ball.dy *= -1;
           brick.visible = false;
@@ -146,7 +144,7 @@ function moveBall() {
     });
   });
 
-  // Hit bottom wall - Lose
+  // Bottom wall
   if (ball.y + ball.size > canvas.height) {
     showAllBricks();
     score = 0;
@@ -162,7 +160,7 @@ function increaseScore() {
   }
 }
 
-// Make all bricks appear
+// Bricks appear
 function showAllBricks() {
   bricks.forEach(column => {
     column.forEach(brick => (brick.visible = true));
